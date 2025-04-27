@@ -1,5 +1,7 @@
 # Hagoromo
 
+[![Hagoromo Demo](http://img.youtube.com/vi/k0RUaP7xOoo/0.jpg)](https://www.youtube.com/watch?v=k0RUaP7xOoo "Hagoromo Demo")
+
 <br/>
 <br/>
 
