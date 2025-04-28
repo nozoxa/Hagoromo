@@ -5,6 +5,14 @@
 デモ URL:
 　https://youtu.be/k0RUaP7xOoo?si=x3SaB8hpCM4vEO_E
 
+　　- [0:00](https://youtu.be/k0RUaP7xOoo?si=EM5wYsA9CxxWqT2o) ～ プラグイン適用なし
+
+　　- [1:39](https://youtu.be/k0RUaP7xOoo?si=0mLUle77mWh0ANKp) ～ プラグイン適用あり
+
+　　　└ プラグイン適用なしの動画のとおり、スキニングデータはダンスモーションのみです
+
+　　　└ それ以外はプラグインで計算した結果をアニメーションポーズとして出力しています
+
 <br/>
 <br/>
 
@@ -26,9 +34,9 @@
 
 　**● 静的・動的なコライダに対応した堅牢な衝突検出システムを実装し、可能な限り貫通を防止しています**
 
-　**● UE の VectorRegister( SIMD )を利用した数学ライブラリを開発し、ほぼ全ての計算が高速に行われます**
+　**● UE の VectorRegister( SIMD )を利用した数学ライブラリを開発し、ほぼ全ての計算が高速に実行されます**
 
-　**● 無料**
+　**● \  無料  /  ｽﾃｷ!!!**
 
 <br/>
 <br/>
