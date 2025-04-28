@@ -7,7 +7,7 @@
 
 　　- [0:00](https://youtu.be/k0RUaP7xOoo?si=EM5wYsA9CxxWqT2o) ～ プラグイン適用なし
 
-　　- [1:39](https://youtu.be/k0RUaP7xOoo?si=0mLUle77mWh0ANKp) ～ プラグイン適用あり
+　　- [1:39](https://youtu.be/k0RUaP7xOoo?si=H5prtSiqccYcSImJ&t=99) ～ プラグイン適用あり
 
 　　　└ プラグイン適用なしの動画のとおり、スキニングデータはダンスモーションのみです
 
