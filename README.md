@@ -64,7 +64,7 @@
 
 ## 使い方 :
 
-　[Wiki](https://github.com/nozoxa/Hagoromo/wiki) をご確認ください。
+　[Wiki](https://github.com/nozoxa/Hagoromo/wiki/Hagoromo-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9) をご確認ください。
 
 <br/>
 <br/>
