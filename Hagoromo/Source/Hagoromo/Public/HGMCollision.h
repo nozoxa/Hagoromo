@@ -8,11 +8,12 @@
 
 #include "HGMCollision.generated.h"
 
+class UPhysicsAsset;
 struct FHGMPhysicsContext;
 struct FHGMPhysicsSettings;
 struct FHGMSIMDStructure;
 struct FHGMSimulationPlane;
-
+struct FComponentSpacePoseContext;
 
 struct FHGMBoneSpaceSphereCollider
 {
@@ -102,13 +103,13 @@ struct FHGMPlaneCollider
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FBoneReference DrivingBone {};
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FVector LocationOffset = FVector::ZeroVector;
 
-	UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "-360.0", ClampMax = "360.0"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (ClampMin = "-360.0", ClampMax = "360.0"))
 	FRotator RotationOffset = FRotator::ZeroRotator;
 };
 

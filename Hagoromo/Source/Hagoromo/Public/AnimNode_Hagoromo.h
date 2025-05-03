@@ -17,7 +17,7 @@
 #include "AnimNode_Hagoromo.generated.h"
 
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct HAGOROMO_API FAnimNode_Hagoromo : public FAnimNode_SkeletalControlBase
 {
 	GENERATED_BODY()
@@ -43,7 +43,7 @@ public:
 	*
 	* This is setting of chain to be included in physics simulation.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Hagoromo Chain Settings", TitleProperty = "RootBone", DisplayPriority = "1"))
+	UPROPERTY(EditDefaultsOnly, Category = "Hagoromo Settings", meta = (DisplayName = "Hagoromo Chain Settings", TitleProperty = "RootBone", DisplayPriority = "1"))
 	TArray<FHGMChainSetting> ChainSettings {};
 
 	/**
@@ -51,7 +51,7 @@ public:
 	*
 	* Parameters to adjust physical behavior.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Hagoromo General Settings", DisplayPriority = "2"))
+	UPROPERTY(EditDefaultsOnly, Category = "Hagoromo Settings", meta = (DisplayName = "Hagoromo General Settings", DisplayPriority = "2"))
 	FHGMPhysicsSettings PhysicsSettings {};
 
 	/**
@@ -63,7 +63,7 @@ public:
 	* Available forms of colliders are spheres and capsules.
 	* Prevents hair and clothing from penetrating body due to physical asset in question.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Hagoromo Body Collider Settings", DisplayPriority="3"))
+	UPROPERTY(EditDefaultsOnly, Category = "Hagoromo Settings", meta = (DisplayName = "Hagoromo Body Collider Settings", DisplayPriority="3"))
 	TObjectPtr<UPhysicsAsset> PhysicsAssetForBodyCollider = nullptr;
 
 	/**
@@ -71,7 +71,7 @@ public:
 	*
 	* Additional collider settings other than body collider.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Hagoromo Additional Collider Settings", DisplayPriority="4"))
+	UPROPERTY(EditDefaultsOnly, Category = "Hagoromo Settings", meta = (DisplayName = "Hagoromo Additional Collider Settings", DisplayPriority="4"))
 	FHGMAdditionalColliderSettings AdditionalColliderSettings {};
 
 	/**
@@ -81,7 +81,7 @@ public:
 	* Number to identify animation curve to be applied to node.
 	* For example, curve like Hagoromo_Alpha_AnimationCurveNumber will be applied to node in question.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Hagoromo Animation Curve Number", UIMin = 0, ClampMin = 0, DisplayPriority = "0"))
+	UPROPERTY(EditDefaultsOnly, Category = "Hagoromo Settings", meta = (DisplayName = "Hagoromo Animation Curve Number", UIMin = 0, ClampMin = 0, DisplayPriority = "0"))
 	int32 AnimationCurveNumber = 0;
 
 	FHGMPhysicsContext PhysicsContext {};

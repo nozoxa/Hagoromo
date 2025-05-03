@@ -2,11 +2,13 @@
 
 #pragma once
 
+#include "AnimNode_Hagoromo.h"
+
 #include "CoreMinimal.h"
 #include "UObject/ObjectMacros.h"
-#include "AnimNode_Hagoromo.h"
 #include "EdGraph/EdGraphNodeUtils.h"
 #include "AnimGraphNode_SkeletalControlBase.h"
+
 #include "AnimGraphNode_Hagoromo.generated.h"
 
 class FCompilerResultsLog;
@@ -17,7 +19,7 @@ class UAnimGraphNode_Hagoromo final : public UAnimGraphNode_SkeletalControlBase
 {
 	GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category=Settings)
 	FAnimNode_Hagoromo Node {};
 
 public:

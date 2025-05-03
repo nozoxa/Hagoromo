@@ -10,6 +10,8 @@ struct FHGMSimulationPlane;
 struct FHGMSIMDRelativeLimitAngle;
 struct FHGMSIMDAnimPoseConstraintMovableRadius;
 struct FHGMSIMDAnimPoseConstraintLimitAngle;
+struct FComponentSpacePoseContext;
+
 
 struct FHGMSIMDStructure
 {

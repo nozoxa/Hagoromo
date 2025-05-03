@@ -11,14 +11,17 @@ public class HagoromoEditor : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"Core", "CoreUObject", "Engine", "Hagoromo",
-		});
-
-
-		PrivateDependencyModuleNames.AddRange(new string[]
-		{
-			"Slate", "SlateCore", "AnimGraph", "AnimGraphRuntime", "BlueprintGraph",
-			"UnrealEd", "Persona", "EditorFramework", "AnimationEditMode",
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"Slate",
+			"SlateCore",
+			"AnimGraph",
+			"AnimGraphRuntime",
+			"BlueprintGraph",
+			"UnrealEd",
+			"Persona",
+			"Hagoromo",
 		});
 	}
 }

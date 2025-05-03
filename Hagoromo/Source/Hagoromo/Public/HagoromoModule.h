@@ -43,7 +43,7 @@ class UHagoromoSettings : public UObject
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, config)
+	UPROPERTY(EditAnywhere, config, Category = "Hagoromo Plugin Settings")
 	float TargetFrameRate = 60.0f;
 };
 

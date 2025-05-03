@@ -2,9 +2,10 @@
 
 #pragma once
 
-#include "Math/Vector.h"
+#include "CoreMinimal.h"
 #include "Math/VectorRegister.h"
 #include "Math/UnrealMathVectorCommon.h"
+#include "Containers/StaticArray.h"
 
 #if HGM_USE_FLOAT32
 using FHGMReal = float;
@@ -625,7 +626,7 @@ struct HAGOROMO_API FHGMSIMDLibrary
 		A = MakeVectorRegister(StaticCast<FHGMSIMDRealComponentType>(X), StaticCast<FHGMSIMDRealComponentType>(Y), StaticCast<FHGMSIMDRealComponentType>(Z), StaticCast<FHGMSIMDRealComponentType>(W));
 	}
 
-	FORCEINLINE static void Load(FHGMSIMDReal& A, const TStaticArray<FHGMReal, 4>& RealValues)
+	FORCEINLINE static void Load(FHGMSIMDReal& A, TStaticArray<FHGMReal, 4>& RealValues)
 	{
 		TStaticArray<FHGMSIMDRealComponentType, 4> Values {};
 		FHGMSIMDRealComponentType* RawValues = nullptr;

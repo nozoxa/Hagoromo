@@ -29,34 +29,13 @@ public class Hagoromo : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"Core", "CoreUObject", "Engine",
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"AnimGraphRuntime",
+			"Slate",
+			"SlateCore",
+			"Settings"
 		});
-
-
-		PrivateDependencyModuleNames.AddRange(new string[]
-		{
-				"AnimGraph", "AnimGraphRuntime", "Slate", "SlateCore",
-		});
-
-
-		BuildVersion Version;
-		if (BuildVersion.TryRead(BuildVersion.GetDefaultFileName(), out Version))
-		{
-			if (Version.MajorVersion == 5)
-			{
-				PrivateDependencyModuleNames.AddRange(new[]
-				{
-					"EditorFramework",
-				});
-
-				if (Version.MinorVersion >= 1)
-				{
-					PrivateDependencyModuleNames.AddRange(new[]
-					{
-						"AnimationEditMode"
-					});
-				}
-			}
-		}
 	}
 }

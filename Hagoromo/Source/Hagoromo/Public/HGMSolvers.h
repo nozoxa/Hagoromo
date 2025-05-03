@@ -7,6 +7,8 @@
 #include "HGMCollision.h"
 
 #include "CoreMinimal.h"
+#include "Curves/CurveFloat.h"
+#include "BonePose.h"
 
 #include "HGMSolvers.generated.h"
 
@@ -37,24 +39,12 @@ struct FHGMSimulationPlane
 };
 
 
-UENUM()
-enum class EHGMAxis : uint8
-{
-	XPositive,
-	XNegative,
-	YPositive,
-	YNegative,
-	ZPositive,
-	ZNegative,
-};
-
-
 USTRUCT()
 struct FHGMAdditionalColliderSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	TArray<FHGMPlaneCollider> PlaneColliders {};
 };
 
@@ -64,7 +54,7 @@ struct FHGMBoneSphereColliderSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0))
 	double Radius = 2.0;
 
 	/**
@@ -76,7 +66,7 @@ struct FHGMBoneSphereColliderSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Radius.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -86,7 +76,7 @@ struct FHGMFrictionSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Friction = 0.15;
 
 	/**
@@ -98,7 +88,7 @@ struct FHGMFrictionSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Friction.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -108,7 +98,7 @@ struct FHGMWorldVelocityDampingSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 0.6;
 
 	/**
@@ -120,7 +110,7 @@ struct FHGMWorldVelocityDampingSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by WorldVelocityDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -130,7 +120,7 @@ struct FHGMWorldAngularVelocityDampingSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 0.65;
 
 	/**
@@ -142,7 +132,7 @@ struct FHGMWorldAngularVelocityDampingSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by WorldAngularVelocityDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -152,7 +142,7 @@ struct FHGMSimulationVelocityDampingSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 1.0;
 
 	/**
@@ -164,7 +154,7 @@ struct FHGMSimulationVelocityDampingSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by SimulationVelocityDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -174,7 +164,7 @@ struct FHGMSimulationAngularVelocityDampingSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 1.0;
 
 	/**
@@ -186,7 +176,7 @@ struct FHGMSimulationAngularVelocityDampingSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by SimulationAngularVelocityDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -196,7 +186,7 @@ struct FHGMMasterDampingSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double MasterDamping = 0.0;
 
 	/**
@@ -208,7 +198,7 @@ struct FHGMMasterDampingSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by MasterDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -218,7 +208,7 @@ struct FHGMAnimPoseConstraintMovableRadiusSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0))
 	double Radius = 0.0;
 
 	/**
@@ -230,7 +220,7 @@ struct FHGMAnimPoseConstraintMovableRadiusSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Radius.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 
 	/**
@@ -238,10 +228,10 @@ struct FHGMAnimPoseConstraintMovableRadiusSettings
 	*
 	* The closer value is to 0.0, sooner it returns to limiting range.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 0.0f;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve DampingMultiplierCurve {};
 };
 
@@ -257,7 +247,7 @@ struct FHGMAnimPoseConstraintLimitAngleSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (ForceUnits = "Degrees", UIMin = 0.0, ClampMin = 0.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (ForceUnits = "Degrees", UIMin = 0.0, ClampMin = 0.0))
 	double Angle = 0.0;
 
 	/**
@@ -269,7 +259,7 @@ struct FHGMAnimPoseConstraintLimitAngleSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Angle.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 
 	/**
@@ -277,10 +267,10 @@ struct FHGMAnimPoseConstraintLimitAngleSettings
 	*
 	* The closer value is to 0.0, sooner it returns to limiting angle.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 0.0f;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve DampingMultiplierCurve {};
 };
 
@@ -296,7 +286,7 @@ struct FHGMRelativeLimitAngleConstraintSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, meta = (ForceUnits = "Degrees", UIMin = 0.0, ClampMin = 0.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (ForceUnits = "Degrees", UIMin = 0.0, ClampMin = 0.0))
 	double Angle = 0.0;
 
 	/**
@@ -308,7 +298,7 @@ struct FHGMRelativeLimitAngleConstraintSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Angle.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 
 	/**
@@ -316,10 +306,10 @@ struct FHGMRelativeLimitAngleConstraintSettings
 	*
 	* The closer value is to 0.0, sooner it returns to limiting angle.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double Damping = 0.0f;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FRuntimeFloatCurve DampingMultiplierCurve {};
 };
 
@@ -335,7 +325,7 @@ struct FHGMMassSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly,  meta = (UIMin = 0.1, ClampMin = 0.1))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.1, ClampMin = 0.1))
 	double Mass = 1.0;
 
 	/**
@@ -347,7 +337,7 @@ struct FHGMMassSettings
 	* Horizontal axis corresponds to bone length ratio 0.0 to 1.0.
 	* Vertical axis is value to be multiplied by Mass.
 	*/
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "")
 	FRuntimeFloatCurve MultiplierCurve {};
 };
 
@@ -357,7 +347,7 @@ struct FHGMGravitySettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	double Gravity = 9.8;
 
 	/**
@@ -365,7 +355,7 @@ struct FHGMGravitySettings
 	*
 	* Switch to gravity with respect to arbitrary bone.
 	*/
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "")
 	bool bUseBoneSpaceGravity = false;
 
 	/**
@@ -373,7 +363,7 @@ struct FHGMGravitySettings
 	*
 	* Specifies bones that determine direction of gravity.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseBoneSpaceGravity", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseBoneSpaceGravity", EditConditionHides))
 	FBoneReference DrivingBone {};
 
 	/**
@@ -383,7 +373,7 @@ struct FHGMGravitySettings
 	* Specifies axis of bone.　This is direction of gravity.
 	* If you want to apply gravity in negative direction, set Gravity to minus.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseBoneSpaceGravity", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseBoneSpaceGravity", EditConditionHides))
 	TEnumAsByte<EAxis::Type> Axis = EAxis::X;
 };
 
@@ -398,7 +388,7 @@ struct FHGMChainSetting
 	*
 	* Select root bone of chain to which physics simulation will be applied.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	FBoneReference RootBone {};
 
 	/**
@@ -408,9 +398,9 @@ struct FHGMChainSetting
 	* If there are bones in chain that you want to exclude from simulation, specify here.
 	* Physics simulation is no longer applied to selected bone and bones below it.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (TitleProperty = "BoneName", EditCondition = "bUseExcludeBones"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (TitleProperty = "BoneName", EditCondition = "bUseExcludeBones"))
 	TArray<FBoneReference> ExcludeBones {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bUseExcludeBones = false;
 
 	/**
@@ -420,7 +410,7 @@ struct FHGMChainSetting
 	* Select whether to anchor root bone to animation pose.
 	* If not fixed, it will continue to fall due to gravity.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bBeginBonePositionFixed = true;
 
 	/**
@@ -430,7 +420,7 @@ struct FHGMChainSetting
 	* Specifies normal of plane that constrains movement of bone.
 	* Note : It will not work unless bUsePlanarConstraint in Hagoromo General Settings is ON.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	TEnumAsByte<EAxis::Type> AnimPoseConstraintPlanarAxis = EAxis::None;
 
 	/**
@@ -441,9 +431,9 @@ struct FHGMChainSetting
 	* Parameter for adjusting angular constraint relative to parent bone for each bone in chain.
 	* This parameter overrides RelativeLimitAngleConstraintSettings in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Relative Limit Angle Each Bone", EditCondition = "bOverrideRelativeLimitAngleEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Relative Limit Angle Each Bone", EditCondition = "bOverrideRelativeLimitAngleEachBone"))
 	FHGMRelativeLimitAngleConstraintSettings RelativeLimitAngleConstraintSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideRelativeLimitAngleEachBone = false;
 
 	/**
@@ -455,9 +445,9 @@ struct FHGMChainSetting
 	* This parameter overrides AnimPoseConstraintMovableRadius in Hagoromo General Settings.
 	* Note: bUseAnimPoseConstraint and bUseAnimPoseConstraintMovableRadius in Hagoromo General Settings must be enabled for this to work.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Anim Pose Constraint Movable Radius Each Bone", EditCondition = "bOverrideAnimPoseConstraintMovableRadiusEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Anim Pose Constraint Movable Radius Each Bone", EditCondition = "bOverrideAnimPoseConstraintMovableRadiusEachBone"))
 	FHGMAnimPoseConstraintMovableRadiusSettings AnimPoseConstraintMovableRadiusSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideAnimPoseConstraintMovableRadiusEachBone = false;
 
 	/**
@@ -469,9 +459,9 @@ struct FHGMChainSetting
 	* This parameter overrides AnimPoseConstraintMovableRadius in Hagoromo General Settings.
 	* Note: bUseAnimPoseConstraint and bUseAnimPoseConstraintMovableRadius in Hagoromo General Settings must be enabled for this to work.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Anim Pose Constraint Limit Angle Each Bone", EditCondition = "bOverrideAnimPoseConstraintLimitAngleEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Anim Pose Constraint Limit Angle Each Bone", EditCondition = "bOverrideAnimPoseConstraintLimitAngleEachBone"))
 	FHGMAnimPoseConstraintLimitAngleSettings AnimPoseConstraintLimitAngleSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideAnimPoseConstraintLimitAngleEachBone = false;
 
 	/**
@@ -481,9 +471,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust radius of the sphere collider in units of bones in chain.
 	* This parameter overrides BoneSphereColliderRadius in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override BoneSphereColliderRadius Each Bone", EditCondition = "bOverrideBoneSphereColliderRadiusEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override BoneSphereColliderRadius Each Bone", EditCondition = "bOverrideBoneSphereColliderRadiusEachBone"))
 	FHGMBoneSphereColliderSettings BoneSphereColliderSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideBoneSphereColliderRadiusEachBone = false;
 
 	/**
@@ -493,9 +483,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust radius of the sphere collider in units of bones in chain.
 	* This parameter overrides Friction in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Friction Each Bone", EditCondition = "bOverrideFrictionEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Friction Each Bone", EditCondition = "bOverrideFrictionEachBone"))
 	FHGMFrictionSettings FrictionSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideFrictionEachBone = false;
 
 	/**
@@ -505,9 +495,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust Force generated by movement of actor in units of bones in chain.
 	* This parameter overrides WorldVelocityDamping in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override World Velocity Damping Each Bone", EditCondition = "bOverrideWorldVelocityDampingEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override World Velocity Damping Each Bone", EditCondition = "bOverrideWorldVelocityDampingEachBone"))
 	FHGMWorldVelocityDampingSettings WorldVelocityDampingSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideWorldVelocityDampingEachBone = false;
 
 	/**
@@ -517,9 +507,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust Force generated by rotation of actor in units of bones in chain.
 	* This parameter overrides WorldAngularVelocity in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override World Angular Velocity Damping Each Bone", EditCondition = "bOverrideWorldAngularVelocityDampingEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override World Angular Velocity Damping Each Bone", EditCondition = "bOverrideWorldAngularVelocityDampingEachBone"))
 	FHGMWorldAngularVelocityDampingSettings WorldAngularVelocityDampingSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideWorldAngularVelocityDampingEachBone = false;
 
 	/**
@@ -529,9 +519,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust Force generated by movement of SimulationRootBone in units of bones in chain.
 	* This parameter overrides SimulationVelocityDamping in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Simulation Velocity Damping Each Bone", EditCondition = "bOverrideSimulationVelocityDampingEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Simulation Velocity Damping Each Bone", EditCondition = "bOverrideSimulationVelocityDampingEachBone"))
 	FHGMSimulationVelocityDampingSettings SimulationVelocityDampingSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideSimulationVelocityDampingEachBone = false;
 
 	/**
@@ -541,9 +531,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust Force generated by rotation of SimulationRootBone in units of bones in chain.
 	* This parameter overrides SimulationAngularVelocity in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Simulation Angular Velocity Damping Each Bone", EditCondition = "bOverrideSimulationAngularVelocityDampingEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Simulation Angular Velocity Damping Each Bone", EditCondition = "bOverrideSimulationAngularVelocityDampingEachBone"))
 	FHGMSimulationAngularVelocityDampingSettings SimulationAngularVelocityDampingSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideSimulationAngularVelocityDampingEachBone = false;
 
 	/**
@@ -553,9 +543,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust MasterDamping of each bone unit in chain.
 	* This parameter overrides MasterDamping in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override MasterDamping Each Bone", EditCondition = "bOverrideMasterDampingEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override MasterDamping Each Bone", EditCondition = "bOverrideMasterDampingEachBone"))
 	FHGMMasterDampingSettings MasterDampingSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideMasterDampingEachBone = false;
 
 	/**
@@ -565,9 +555,9 @@ struct FHGMChainSetting
 	* This parameter is used to adjust Mass of each bone unit in chain.
 	* This parameter overrides Mass in Hagoromo General Settings.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Override Mass Each Bone", EditCondition = "bOverrideMassEachBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Override Mass Each Bone", EditCondition = "bOverrideMassEachBone"))
 	FHGMMassSettings MassSettings {};
-	UPROPERTY(EditAnywhere, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category = "", meta = (InlineEditConditionToggle))
 	bool bOverrideMassEachBone = false;
 };
 
@@ -602,7 +592,7 @@ struct FHGMPhysicsSettings
 	*
 	* See https://blog.mmacklin.com/?page_id=8450 .
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double StructureStiffness = 0.004;
 
 	/**
@@ -610,7 +600,7 @@ struct FHGMPhysicsSettings
 	*
 	* Enable constraints that force chain length to remain unchanged.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseRigidVerticalStructureConstraint = false;
 
 	/**
@@ -620,7 +610,7 @@ struct FHGMPhysicsSettings
 	* Enable horizontal distance constraints on chain.
 	* When used for skirts and cloaks, it prevents cloth from stretching too much and improves appearance.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseHorizontalStructuralConstraint = false;
 
 	/**
@@ -630,7 +620,7 @@ struct FHGMPhysicsSettings
 	* Add horizontal distance constraints between first and last two chains.
 	* Enable if chain loops horizontally, as in skirt.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseHorizontalStructuralConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseHorizontalStructuralConstraint", EditConditionHides))
 	bool bLoopHorizontalStructure = false;
 
 	/**
@@ -638,7 +628,7 @@ struct FHGMPhysicsSettings
 	*
 	* Enables constraints to adjust vertical bend of the cloth.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "!bUseRigidVerticalStructureConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "!bUseRigidVerticalStructureConstraint", EditConditionHides))
 	bool bUseVerticalBendConstraint = false;
 
 	/**
@@ -648,7 +638,7 @@ struct FHGMPhysicsSettings
 	* Specify stiffness of vertical bending constraint from 0.0 to 1.0.
 	* Larger value, less likely fabric is to bend lengthwise.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseVerticalBendConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseVerticalBendConstraint", EditConditionHides))
 	double VerticalBendStiffness = 0.004;
 
 	/**
@@ -656,7 +646,7 @@ struct FHGMPhysicsSettings
 	*
 	* Enables constraints to adjust horizontal bend of the cloth.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseHorizontalBendConstraint = false;
 
 	/**
@@ -666,7 +656,7 @@ struct FHGMPhysicsSettings
 	* Specify stiffness of horizontal bending constraint from 0.0 to 1.0.
 	* Larger value, less likely the fabric is to bend laterally.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseHorizontalBendConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseHorizontalBendConstraint", EditConditionHides))
 	double HorizontalBendStiffness = 0.004;
 
 	/**
@@ -674,7 +664,7 @@ struct FHGMPhysicsSettings
 	*
 	* Enable constraints that adjust twist of cloth.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseShearConstraint = false;
 
 	/**
@@ -684,7 +674,7 @@ struct FHGMPhysicsSettings
 	* Specify stiffness of the shear constraint from 0.0 to 1.0.
 	* Larger value, less likely cloth is to twist.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseShearConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0, EditCondition = "bUseShearConstraint", EditConditionHides))
 	double ShearStiffness = 0.004;
 
 	/**
@@ -694,7 +684,7 @@ struct FHGMPhysicsSettings
 	* Enable distance constraints on animation poses.
 	* Use this function when you want to add physics effects while maintaining animation pose (original shape).
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseAnimPoseConstraint = false;
 
 	/**
@@ -710,9 +700,9 @@ struct FHGMPhysicsSettings
 	* MultiplierCurve is curve that multiplies Radius.
 	* Horizontal axis of curve represents ratio 0.0 to 1.0 of length of bone.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
 	bool bUseAnimPoseConstraintMovableRadius = false;
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Anim Pose Constraint Movable Radius", EditCondition = "bUseAnimPoseConstraintMovableRadius", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Anim Pose Constraint Movable Radius", EditCondition = "bUseAnimPoseConstraintMovableRadius", EditConditionHides))
 	FHGMAnimPoseConstraintMovableRadiusSettings AnimPoseConstraintMovableRadiusSettings {};
 
 	/**
@@ -728,9 +718,9 @@ struct FHGMPhysicsSettings
 	* MultiplierCurve is curve that multiplies Angle.
 	* Horizontal axis of curve represents ratio 0.0 to 1.0 of length of bone.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
 	bool bUseAnimPoseConstraintLimitAngle = false;
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Anim Pose Constraint Limit Angle", EditCondition = "bUseAnimPoseConstraintLimitAngle", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Anim Pose Constraint Limit Angle", EditCondition = "bUseAnimPoseConstraintLimitAngle", EditConditionHides))
 	FHGMAnimPoseConstraintLimitAngleSettings AnimPoseConstraintLimitAngleSettings {};
 
 	/**
@@ -740,7 +730,7 @@ struct FHGMPhysicsSettings
 	* Enables constraints that lock motion of bone to plane normal to arbitrary axis of bone.
 	* This is useful for adjusting tail and band simulations.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseAnimPoseConstraint", EditConditionHides))
 	bool bUseAnimPoseConstraintPlanar = false;
 
 	/**
@@ -750,7 +740,7 @@ struct FHGMPhysicsSettings
 	* Enable angular constraints relative to the parent bone.
 	* This is useful for adjusting tail and band simulations.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseRelativeLimitAngleConstraint = false;
 
 	/**
@@ -760,7 +750,7 @@ struct FHGMPhysicsSettings
 	* Specifies an angular constraint relative to parent bone.
 	* Used in cases where you want gradual angle from parent bone, such as tail or band.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Relative Limit Angle", EditCondition = "bUseRelativeLimitAngleConstraint", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Relative Limit Angle", EditCondition = "bUseRelativeLimitAngleConstraint", EditConditionHides))
 	FHGMRelativeLimitAngleConstraintSettings RelativeLimitAngleConstraintSettings {};
 
 	/**
@@ -768,7 +758,7 @@ struct FHGMPhysicsSettings
 	*
 	* Sphere collider settings attached to the bones to be simulated.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Bone Sphere Collider Radius"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Bone Sphere Collider Radius"))
 	FHGMBoneSphereColliderSettings BoneSphereColliderSettings {};
 
 	/**
@@ -780,7 +770,7 @@ struct FHGMPhysicsSettings
 	* If value is 1.0, penetration due to collision is resolved immediately, but repeating penetration → resolution at high speed may lead to physical violence.
 	* Value less than 1.0 allows penetration to be resolved over multiple frames, reducing collision-induced vibration.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0, UIMax = 1.0, ClampMax = 1.0))
 	double CollisionBlend = 0.8;
 
 	/**
@@ -792,7 +782,7 @@ struct FHGMPhysicsSettings
 	* Force originating from collider extrusion is attenuated by amount of value.
 	* Proper adjustment may improve vibration.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 0.0, ClampMin = 0.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 0.0, ClampMin = 0.0))
 	double ColliderPenetrationDepth = 0.5;
 
 	/**
@@ -804,7 +794,7 @@ struct FHGMPhysicsSettings
 	* This will prevent more cloth penetration.
 	* Note that although SIMD handles 4 line segments at once, processing load can still increase significantly!
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	bool bUseEdgeCollider = false;
 
 	/**
@@ -812,7 +802,7 @@ struct FHGMPhysicsSettings
 	*
 	* Generates line segment collision determination for horizontal chains as well.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseHorizontalStructuralConstraint && bUseEdgeCollider", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseHorizontalStructuralConstraint && bUseEdgeCollider", EditConditionHides))
 	bool bUseHorizontalEdgeCollider = false;
 
 	/**
@@ -824,7 +814,7 @@ struct FHGMPhysicsSettings
 	* Friction occurs when bones to be simulated collide with body collider such as character.
 	* For example, in case of cloth, smaller value gives impression of lighter fiber.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Friction"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Friction"))
 	FHGMFrictionSettings FrictionSettings {};
 
 	/**
@@ -834,7 +824,7 @@ struct FHGMPhysicsSettings
 	* Mass of the bone to be physically simulated.
 	* Structure, Shear, Bend If mass is greater than paired bone in constraint, Its bones are less susceptible to constraint.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Mass"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Mass"))
 	FHGMMassSettings MassSettings {};
 
 	/**
@@ -846,7 +836,7 @@ struct FHGMPhysicsSettings
 	* 1.0, no physical reaction occurs at all when actor moves.
 	* In case of 0.0, if actor moves even slightly, physical reaction occurs.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "World Velocity Damping"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "World Velocity Damping"))
 	FHGMWorldVelocityDampingSettings WorldVelocityDampingSettings {};
 
 	/**
@@ -856,7 +846,7 @@ struct FHGMPhysicsSettings
 	* Threshold to ignore force generated by actor's movement.
 	* If amount of movement in one frame > IgnoreWorldVelocityThreshold, actor's movement will not affect results of physics simulation.
 	*/
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "")
 	double IgnoreWorldVelocityThreshold = 100.0f;
 
 	/**
@@ -868,7 +858,7 @@ struct FHGMPhysicsSettings
 	* 1.0, no physical reaction occurs at all when actor rotates.
 	* In case of 0.0, if actor rotates even slightly, physical reaction occurs.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "World Angular Velocity Damping"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "World Angular Velocity Damping"))
 	FHGMWorldAngularVelocityDampingSettings WorldAngularVelocityDampingSettings {};
 
 	/**
@@ -878,7 +868,7 @@ struct FHGMPhysicsSettings
 	* Threshold to ignore force generated by actor's rotation.
 	* If amount of rotation in one frame > IgnoreWorldVelocityThreshold, actor's rotation will not affect results of physics simulation.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (ForceUnits = "Degrees"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (ForceUnits = "Degrees"))
 	double IgnoreWorldAngularVelocityThreshold = 20.0f;
 
 	/**
@@ -890,9 +880,9 @@ struct FHGMPhysicsSettings
 	* For example, if large change in Hip's posture causes physics to go haywire, specify Hip.
 	* Effect of the Hip's posture change can be fine-tuned with SimulationVelocityDamping and SimulationAngularVelocityDamping.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseSimulationRootBone"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseSimulationRootBone"))
 	FBoneReference SimulationRootBone {};
-	UPROPERTY(EditDefaultsOnly, meta = (InlineEditConditionToggle))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (InlineEditConditionToggle))
 	bool bUseSimulationRootBone = false;
 
 	/**
@@ -904,7 +894,7 @@ struct FHGMPhysicsSettings
 	* 1.0, no physical reaction occurs at all when SimulationRootBone moves.
 	* In case of 0.0, if SimulationRootBone moves even slightly, physical reaction occurs.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Simulation Velocity Damping", EditCondition = "bUseSimulationRootBone", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Simulation Velocity Damping", EditCondition = "bUseSimulationRootBone", EditConditionHides))
 	FHGMSimulationVelocityDampingSettings SimulationVelocityDampingSettings {};
 
 	/**
@@ -914,7 +904,7 @@ struct FHGMPhysicsSettings
 	* Threshold to ignore force generated by SimulationRootBone's movement.
 	* If amount of movement in one frame > IgnoreSimulationVelocityThreshold, SimulationRootBone's movement will not affect results of physics simulation.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "bUseSimulationRootBone", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (EditCondition = "bUseSimulationRootBone", EditConditionHides))
 	double IgnoreSimulationVelocityThreshold = 100.0f;
 
 	/**
@@ -926,7 +916,7 @@ struct FHGMPhysicsSettings
 	* 1.0, no physical reaction occurs at all when SimulationRootBone rotates.
 	* In case of 0.0, if SimulationRootBone rotates even slightly, physical reaction occurs.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Simulation Angular Velocity Damping", EditCondition = "bUseSimulationRootBone", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Simulation Angular Velocity Damping", EditCondition = "bUseSimulationRootBone", EditConditionHides))
 	FHGMSimulationAngularVelocityDampingSettings SimulationAngularVelocityDampingSettings {};
 
 	/**
@@ -936,7 +926,7 @@ struct FHGMPhysicsSettings
 	* Threshold to ignore force generated by SimulationRootBone's rotation.
 	* If amount of rotation in one frame > IgnoreSimulationVelocityThreshold, SimulationRootBone's rotation will not affect results of physics simulation.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (ForceUnits = "Degrees", EditCondition = "bUseSimulationRootBone", EditConditionHides))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (ForceUnits = "Degrees", EditCondition = "bUseSimulationRootBone", EditConditionHides))
 	double IgnoreSimulationAngularVelocityThreshold = 20.0f;
 
 	/**
@@ -948,7 +938,7 @@ struct FHGMPhysicsSettings
 	* The overall physical behavior can be controlled by adjusting relevant parameters.
 	* For example, if you want fluffy movement, adjust value so that it is greater than 0.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Master Damping"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Master Damping"))
 	FHGMMasterDampingSettings MasterDampingSettings {};
 
 	/**
@@ -958,7 +948,7 @@ struct FHGMPhysicsSettings
 	* Gravity applied to the bone of the physics simulation target.
 	* Note: Gravity is not affected by friction or various damping parameters.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (DisplayName = "Gravity"))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (DisplayName = "Gravity"))
 	FHGMGravitySettings GravitySettings {};
 
 	/**
@@ -972,7 +962,7 @@ struct FHGMPhysicsSettings
 	* For example, if cloth feels stretched and soft despite a sufficiently large value for Stiffness, increasing number of iterations may help.
 	* Note, however, that trade-off is increase in processing load.
 	*/
-	UPROPERTY(EditDefaultsOnly, meta = (UIMin = 1.0, ClampMin = 1.0))
+	UPROPERTY(EditDefaultsOnly, Category = "", meta = (UIMin = 1.0, ClampMin = 1.0))
 	int32 SolverIterations = 8;
 };
 
@@ -1063,10 +1053,6 @@ private:
 // ---------------------------------------------------------------------------------------
 struct FHGMSolverLibrary
 {
-	static EAxis::Type ConvertEHGMAxisToEAxis(EHGMAxis HGMAxis);
-
-	static FHGMReal GetEHGMAxisSign(EHGMAxis HGMAxis);
-
 	static void Transpose(FHGMSimulationPlane& SimulationPlane);
 
 	template<typename SIMDType, typename ComponentType>

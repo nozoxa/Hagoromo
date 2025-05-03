@@ -40,6 +40,7 @@ FString FHGMDebugLibrary::ToString(const FHGMSIMDVector3& V)
 }
 
 
+#if ENABLE_ANIM_DRAW_DEBUG
 void FHGMDebugLibrary::DrawSphere(FComponentSpacePoseContext& PoseContext, const FHGMSIMDVector3& sCenter, const FHGMSIMDReal& sRadius, int32 Segments, FColor Color, ESceneDepthPriorityGroup DepthPriority, FHGMReal Thickness)
 {
 	TStaticArray<FHGMVector3, 4> UnpackedCenters {};
@@ -652,3 +653,4 @@ void FHGMDebugLibrary::DrawVelocities(FComponentSpacePoseContext& PoseContext, c
 		PoseContext.AnimInstanceProxy->AnimDrawDebugOnScreenMessage(SimulationAngularVelocityString, FColor::Black, FVector2D::UnitVector, ESceneDepthPriorityGroup::SDPG_Foreground);
 	}
 }
+#endif

@@ -5,6 +5,9 @@
 #include "HGMDebug.h"
 #include "HGMSolvers.h"
 
+#include "PhysicsEngine/PhysicsAsset.h"
+#include "Animation/AnimNodeBase.h"
+
 DECLARE_CYCLE_STAT(TEXT("Collision CalculateBodyColliderContacts"), STAT_CollisionCalculateBodyColliderContacts, STATGROUP_Hagoromo);
 DECLARE_CYCLE_STAT(TEXT("Collision CalculateBodyColliderContactsForVerticalEdge"), STAT_CollisionCalculateBodyColliderContactsForVerticalEdge, STATGROUP_Hagoromo);
 DECLARE_CYCLE_STAT(TEXT("Collision CalculateBodyColliderContactsForHorizontalEdge"), STAT_CollisionCalculateBodyColliderContactsForHorizontalEdge, STATGROUP_Hagoromo);

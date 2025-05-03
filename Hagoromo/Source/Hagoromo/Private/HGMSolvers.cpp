@@ -7,6 +7,8 @@
 #include "HGMPhysics.h"
 #include "HGMConstraints.h"
 
+#include "Engine/Engine.h"
+
 DECLARE_CYCLE_STAT(TEXT("Solver Initialize"), STAT_SolverInitialize, STATGROUP_Hagoromo);
 DECLARE_CYCLE_STAT(TEXT("Solver PreSimulate"), STAT_SolverPreSimulate, STATGROUP_Hagoromo);
 DECLARE_CYCLE_STAT(TEXT("Solver Simulate"), STAT_SolverSimulate, STATGROUP_Hagoromo);
