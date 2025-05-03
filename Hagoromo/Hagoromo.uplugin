@@ -18,18 +18,12 @@
 		{
 			"Name": "Hagoromo",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64"
-			]
+			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "HagoromoEditor",
 			"Type": "UncookedOnly",
-			"LoadingPhase": "PreDefault",
-			"WhitelistPlatforms": [
-				"Win64"
-			]
+			"LoadingPhase": "PreDefault"
 		}
 	]
 }
