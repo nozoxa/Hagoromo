@@ -1,0 +1,1 @@
+// Hagoromo : Copyright (c) 2025 nozoxa_0131, MIT License

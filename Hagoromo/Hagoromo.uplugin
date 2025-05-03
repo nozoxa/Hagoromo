@@ -1,0 +1,29 @@
+{
+	"FileVersion": 3,
+	"Version": 1.0,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Hagoromo",
+	"Description": "",
+	"Category": "Physics",
+	"CreatedBy": "nozoxa_0131",
+	"CreatedByURL": "https://x.com/nozoxa_0131",
+	"DocsURL": "https://github.com/nozoxa/Hagoromo",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "Hagoromo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "HagoromoEditor",
+			"Type": "UncookedOnly",
+			"LoadingPhase": "PreDefault"
+		}
+	]
+}
