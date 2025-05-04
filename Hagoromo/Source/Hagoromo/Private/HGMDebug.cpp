@@ -537,20 +537,6 @@ void FHGMDebugLibrary::DrawRelativeLimitAngleConstraint(FComponentSpacePoseConte
 	FHGMSIMDTransform sSkeletalMeshComponentTransform {};
 	FHGMSIMDLibrary::Load(sSkeletalMeshComponentTransform, SkeletalMeshComponentTransform);
 
-	TArray<FHGMSIMDVector3> PrevPositions {};
-	PrevPositions.Init(FHGMSIMDVector3::ZeroVector, Solver->SimulationPlane.PackedHorizontalBoneNum);
-	for (int32 StructureIndex = 0; StructureIndex < Solver->SimulationPlane.PackedHorizontalBoneNum; ++StructureIndex)
-	{
-		PrevPositions[StructureIndex] = FHGMMathLibrary::TransformPosition(sSkeletalMeshComponentTransform, Solver->Positions[StructureIndex]);
-	}
-
-
-	TArray<FHGMSIMDReal> TotalAngles {};
-	TotalAngles.Init(HGMSIMDConstants::ZeroReal, Solver->SimulationPlane.PackedHorizontalBoneNum);
-
-	FHGMVector3 RightDirection = FHGMVector3::RightVector;
-	RightDirection = SkeletalMeshComponentTransform.TransformVector(RightDirection);
-
 	for (int32 StructureIndex = 0; StructureIndex < Solver->VerticalStructures.Num(); ++StructureIndex)
 	{
 		const int32 HorizontalIndex = StructureIndex % Solver->SimulationPlane.PackedHorizontalBoneNum;
@@ -558,13 +544,10 @@ void FHGMDebugLibrary::DrawRelativeLimitAngleConstraint(FComponentSpacePoseConte
 		const FHGMSIMDStructure& sVerticalStructure = Solver->VerticalStructures[StructureIndex];
 		const FHGMSIMDReal& sAngle = Solver->RelativeLimitAngles[StructureIndex].sAngle;
 
-		FHGMSIMDVector3 sDirection = FHGMMathLibrary::RotateAngleAxis(-FHGMSIMDVector3::RightVector, TotalAngles[HorizontalIndex], FHGMSIMDVector3::UpVector);
+		const FHGMSIMDVector3 sStart = FHGMMathLibrary::TransformPosition(sSkeletalMeshComponentTransform, Solver->Positions[sVerticalStructure.FirstBonePackedIndex]);
+		const FHGMSIMDVector3 sEnd = FHGMMathLibrary::TransformPosition(sSkeletalMeshComponentTransform, Solver->Positions[sVerticalStructure.SecondBonePackedIndex]);
+		FHGMSIMDVector3 sDirection = FHGMMathLibrary::MakeSafeNormal(sEnd - sStart);
 		sDirection = FHGMMathLibrary::TransformVector(sSkeletalMeshComponentTransform, sDirection);
-		TotalAngles[HorizontalIndex] += sAngle;
-
-		const FHGMSIMDVector3 sStart = PrevPositions[HorizontalIndex];
-		const FHGMSIMDVector3 sEnd = sStart + (sDirection * sVerticalStructure.sLength);
-		PrevPositions[HorizontalIndex] = sEnd;
 
 		TStaticArray<FHGMVector3, 4> UnpackedStartArray {};
 		FHGMSIMDLibrary::Store(sStart, UnpackedStartArray);
@@ -581,12 +564,15 @@ void FHGMDebugLibrary::DrawRelativeLimitAngleConstraint(FComponentSpacePoseConte
 		TStaticArray<FHGMReal, 4> UnpackedAngles {};
 		FHGMSIMDLibrary::Store(sAngle, UnpackedAngles);
 
-		TStaticArray<FHGMReal, 4> UnpackedDummyMasks {};
-		FHGMSIMDLibrary::Store(Solver->DummyBoneMasks[sVerticalStructure.FirstBonePackedIndex], UnpackedDummyMasks);
+		TStaticArray<FHGMReal, 4> UnpackedFirstDummyMasks {};
+		FHGMSIMDLibrary::Store(Solver->DummyBoneMasks[sVerticalStructure.FirstBonePackedIndex], UnpackedFirstDummyMasks);
+
+		TStaticArray<FHGMReal, 4> UnpackedSecondDummyMasks {};
+		FHGMSIMDLibrary::Store(Solver->DummyBoneMasks[sVerticalStructure.SecondBonePackedIndex], UnpackedSecondDummyMasks);
 
 		for (int32 ComponentIndex = 0; ComponentIndex < 4; ++ComponentIndex)
 		{
-			if (UnpackedDummyMasks[ComponentIndex] > 0.0f)
+			if (UnpackedFirstDummyMasks[ComponentIndex] > 0.0f || UnpackedSecondDummyMasks[ComponentIndex] > 0.0f)
 			{
 				continue;
 			}

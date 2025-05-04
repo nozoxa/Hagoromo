@@ -539,17 +539,16 @@ void FHGMConstraintLibrary::RelativeLimitAngleConstraint(const FHGMSimulationPla
 		sSecondBonePosition = FHGMSIMDLibrary::Select(sConstraintMask, sConstrainedSecondBonePosition, sSecondBonePosition);
 	}
 
-	TArray<FHGMSIMDVector3> CopiedPositions = Positions;
 	for (int32 ChildBoneIndex = SimulationPlane.PackedHorizontalBoneNum; ChildBoneIndex < VerticalStructures.Num(); ++ChildBoneIndex)
 	{
 		const FHGMSIMDStructure& sParentVerticalStructure =  VerticalStructures[ChildBoneIndex - SimulationPlane.PackedHorizontalBoneNum];
-		const FHGMSIMDVector3& sParentBoneStartPosition = CopiedPositions[sParentVerticalStructure.FirstBonePackedIndex];
-		const FHGMSIMDVector3& sParentBoneEndPosition = CopiedPositions[sParentVerticalStructure.SecondBonePackedIndex];
+		const FHGMSIMDVector3& sParentBoneStartPosition = Positions[sParentVerticalStructure.FirstBonePackedIndex];
+		const FHGMSIMDVector3& sParentBoneEndPosition = Positions[sParentVerticalStructure.SecondBonePackedIndex];
 		const FHGMSIMDVector3 sParentBoneDirection = FHGMMathLibrary::MakeSafeNormal(sParentBoneEndPosition - sParentBoneStartPosition);
 
 		const FHGMSIMDStructure& sChildVerticalStructure =  VerticalStructures[ChildBoneIndex];
-		const FHGMSIMDVector3& sChildBoneStartPosition = CopiedPositions[sChildVerticalStructure.FirstBonePackedIndex];
-		const FHGMSIMDVector3& sChildBoneEndPosition = CopiedPositions[sChildVerticalStructure.SecondBonePackedIndex];
+		const FHGMSIMDVector3& sChildBoneStartPosition = Positions[sChildVerticalStructure.FirstBonePackedIndex];
+		const FHGMSIMDVector3& sChildBoneEndPosition = Positions[sChildVerticalStructure.SecondBonePackedIndex];
 		const FHGMSIMDVector3 sChildBoneDirection = FHGMMathLibrary::MakeSafeNormal(sChildBoneEndPosition - sChildBoneStartPosition);
 
 		// Calculate overhang angle.
