@@ -87,7 +87,7 @@
 
 <br/>
 
-　基本的な使い方については [Wiki](https://github.com/nozoxa/Hagoromo/wiki/Hagoromo-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9) をご確認ください。
+　基本的な使い方は [Wiki](https://github.com/nozoxa/Hagoromo/wiki/Hagoromo-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9) をご確認ください。
 
 <br/>
 
