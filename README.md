@@ -85,7 +85,13 @@
 
 ## 使い方 :
 
-　[Wiki](https://github.com/nozoxa/Hagoromo/wiki/Hagoromo-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9) をご確認ください。
+<br/>
+
+　基本的な使い方は [Wiki](https://github.com/nozoxa/Hagoromo/wiki/Hagoromo-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9) をご確認ください。
+
+<br/>
+
+　実際の設定例については [セットアップ例](https://github.com/nozoxa/Hagoromo/wiki/%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E4%BE%8B) を参考にしていただけますと幸いです。
 
 <br/>
 <br/>
