@@ -249,7 +249,7 @@ namespace SolverInternal
 
 		FName HagoromoAlphaNameWithCurveNmuber = HagoromoAlphaName;
 		HagoromoAlphaNameWithCurveNmuber.SetNumber(AnimationCurveNumber + 1);
-		AnimInstance->GetCurveValue(HagoromoAlphaName, HagoromoAlpha);
+		AnimInstance->GetCurveValue(HagoromoAlphaNameWithCurveNmuber, HagoromoAlpha);
 
 		PhysicsContext.Alpha = FHGMMathLibrary::Clamp<FHGMReal>(StaticCast<FHGMReal>(HagoromoAlpha), 0.0, 1.0);
 	}
