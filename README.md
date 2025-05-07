@@ -120,6 +120,19 @@
 　[ノゾクサ@nozoxa_0131](https://x.com/nozoxa_0131)
 
 <br/>
+
+---
+
+<br/>
+
+## その他 :
+
+<br/>
+
+　**● [実装にあたり参考にした資料](https://github.com/nozoxa/Hagoromo/wiki/%E5%AE%9F%E8%A3%85%E3%81%AB%E3%81%82%E3%81%9F%E3%82%8A%E5%8F%82%E8%80%83%E3%81%AB%E3%81%97%E3%81%9F%E8%B3%87%E6%96%99
+)**
+
+<br/>
 <br/>
 
 ---
