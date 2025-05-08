@@ -89,28 +89,28 @@ FORCEINLINE FHGMSIMDReal operator/(const FHGMSIMDReal& A, const FHGMSIMDReal& B)
 }
 
 
-FHGMSIMDReal& operator+=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
+FORCEINLINE FHGMSIMDReal& operator+=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
 {
 	A = A + B;
 	return A;
 }
 
 
-FHGMSIMDReal& operator-=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
+FORCEINLINE FHGMSIMDReal& operator-=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
 {
 	A = A - B;
 	return A;
 }
 
 
-FHGMSIMDReal& operator*=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
+FORCEINLINE FHGMSIMDReal& operator*=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
 {
 	A = A * B;
 	return A;
 }
 
 
-FHGMSIMDReal& operator/=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
+FORCEINLINE FHGMSIMDReal& operator/=(FHGMSIMDReal& A, const FHGMSIMDReal& B)
 {
 	A = A / B;
 	return A;
