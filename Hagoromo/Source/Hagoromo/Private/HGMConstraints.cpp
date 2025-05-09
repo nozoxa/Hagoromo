@@ -1,6 +1,7 @@
 // Hagoromo : Copyright (c) 2025 nozoxa_0131, MIT License
 
 #include "HGMConstraints.h"
+#include "HagoromoModule.h"
 #include "HGMDebug.h"
 #include "AnimNode_Hagoromo.h"
 #include "HGMCollision.h"

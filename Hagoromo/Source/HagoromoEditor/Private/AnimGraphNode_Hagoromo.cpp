@@ -1,8 +1,6 @@
 // Hagoromo : Copyright (c) 2025 nozoxa_0131, MIT License
 
 #include "AnimGraphNode_Hagoromo.h"
-#include "HGMMath.h"
-#include "HGMCollision.h"
 
 #include "UnrealWidgetFwd.h"
 #include "Editor/AnimGraph/Public/AnimNodeEditModes.h"

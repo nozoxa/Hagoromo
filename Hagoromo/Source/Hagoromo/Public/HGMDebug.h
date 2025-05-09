@@ -8,7 +8,12 @@
 #include "Animation/AnimInstanceProxy.h"
 
 struct FHGMDynamicBoneSolver;
+struct FHGMPhysicsSettings;
+struct FHGMPhysicsContext;
 struct FHGMBodyCollider;
+struct FHGMPlaneCollider;
+
+struct FComponentSpacePoseContext;
 
 
 // ---------------------------------------------------------------------------------------

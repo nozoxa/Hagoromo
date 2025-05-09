@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Math.h"
+#include "HGMMath.h"
 #include "HGMCollision.h"
 
 struct FHGMPhysicsContext;

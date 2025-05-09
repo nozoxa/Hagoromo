@@ -875,7 +875,7 @@ struct HAGOROMO_API FHGMSIMDLibrary
 // ---------------------------------------------------------------------------------------
 // MathLibrary
 // ---------------------------------------------------------------------------------------
-struct FHGMMathLibrary
+struct HAGOROMO_API FHGMMathLibrary
 {
 	template<typename T>
 	FORCEINLINE static T Abs(T A)
