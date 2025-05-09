@@ -32,7 +32,7 @@ namespace HGMSIMDConstants
 	inline constexpr VectorRegister4Double OneHalfReal = GlobalVectorConstants::DoubleOneHalf;
 	inline constexpr VectorRegister4Double SmallReal = GlobalVectorConstants::DoubleSmallNumber;
 	inline constexpr VectorRegister4Double BigReal = GlobalVectorConstants::DoubleBigNumber;
-	const VectorRegister4Double AllBitMask = MakeVectorRegisterDouble(~uint32(0), ~uint32(0), ~uint32(0), ~uint32(0));
+	const VectorRegister4Double AllBitMask = MakeVectorRegisterDouble(~uint64(0), ~uint64(0), ~uint64(0), ~uint64(0));
 	inline constexpr VectorRegister4Double RadiansToDegrees = GlobalVectorConstants::DOUBLE_RAD_TO_DEG;
 	inline constexpr VectorRegister4Double DegreesToRadians = GlobalVectorConstants::DOUBLE_DEG_TO_RAD;
 #else
@@ -195,7 +195,10 @@ FORCEINLINE FHGMSIMDReal operator-(const FHGMSIMDReal& A)
 FORCEINLINE FHGMSIMDReal operator~(const FHGMSIMDReal& A)
 {
 #if HGM_USE_SIMD_REGISTER_FLOAT4X64
-	return VectorCastIntToDouble(VectorIntNot(VectorCastDoubleToInt(A)));
+	FHGMSIMDReal Result {};
+	Result.XY = VectorCastIntToDouble(VectorIntNot(VectorCastDoubleToInt(A.XY)));
+	Result.ZW = VectorCastIntToDouble(VectorIntNot(VectorCastDoubleToInt(A.ZW)));
+	return Result;
 #else
 	return VectorCastIntToFloat(VectorIntNot(VectorCastFloatToInt(A)));
 #endif
@@ -797,7 +800,7 @@ struct HAGOROMO_API FHGMSIMDLibrary
 	FORCEINLINE static FHGMSIMDReal CastIntToReal(const FHGMSIMDInt& A)
 	{
 #if HGM_USE_SIMD_REGISTER_FLOAT4X64
-		return VectorCastIntToDouble(A);
+		return MakeVectorRegisterDouble(VectorCastIntToFloat(A));
 #else
 		return VectorCastIntToFloat(A);
 #endif
@@ -806,7 +809,7 @@ struct HAGOROMO_API FHGMSIMDLibrary
 	FORCEINLINE static FHGMSIMDInt CastRealToInt(const FHGMSIMDReal& A)
 	{
 #if HGM_USE_SIMD_REGISTER_FLOAT4X64
-		return VectorCastDoubleToInt(A);
+		return VectorFloatToInt(MakeVectorRegisterFloatFromDouble(A));
 #else
 		return VectorCastFloatToInt(A);
 #endif
