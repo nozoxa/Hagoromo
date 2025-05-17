@@ -947,6 +947,8 @@ void FHGMDynamicBoneSolver::Simulate(FComponentSpacePoseContext& Output, FHGMPhy
 	//----------------------------------------------------------
 	// Solve constraints and collision detection
 	//----------------------------------------------------------
+	FHGMConstraintLibrary::FixedBlendConstraint(Positions, PrevPositions, AnimPosePositions, FixedBlends);
+
 	if (PhysicsContext.PhysicsSettings.bUseRelativeLimitAngleConstraint)
 	{
 		FHGMConstraintLibrary::RelativeLimitAngleConstraint(SimulationPlane, VerticalStructures, RelativeLimitAngles, AnimPosePositions, Positions, DummyBoneMasks);
@@ -1086,8 +1088,6 @@ void FHGMDynamicBoneSolver::Simulate(FComponentSpacePoseContext& Output, FHGMPhy
 			FHGMPhysicsLibrary::CalculateFriction(Frictions, PlaneColliderContactCache, ActualFrictions);
 		}
 	}
-
-	FHGMConstraintLibrary::FixedBlendConstraint(Positions, PrevPositions, AnimPosePositions, FixedBlends);
 }
 
 
