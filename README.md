@@ -68,7 +68,7 @@
 
 <br/>
 
-　　　**( 1 )**　**[Tags > 20250503_UE5.5_v1.0.0](https://github.com/nozoxa/Hagoromo/releases/tag/20250503_v1.0.0)** から **Hagoromo.zip** をダウンロードします。
+　　　**( 1 )**　**[Tags > 20250503_UE5.5_v1.0.0](https://github.com/nozoxa/Hagoromo/releases/tag/20250503_UE5.5_v1.0.0)** から **Hagoromo.zip** をダウンロードします。
 
 　　　**( 2 )**　**Hagoromo.zip** を解凍します。
 
