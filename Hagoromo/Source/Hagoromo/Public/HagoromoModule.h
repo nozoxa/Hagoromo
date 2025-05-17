@@ -7,8 +7,6 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-#include "HagoromoModule.generated.h"
-
 DECLARE_LOG_CATEGORY_EXTERN(LogHagoromoRuntime, Log, Log);
 
 
@@ -33,19 +31,6 @@ UE_CLOG(Condition, LogHagoromoRuntime, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCT
 
 
 DECLARE_STATS_GROUP(TEXT("Hagoromo"), STATGROUP_Hagoromo, STATCAT_Advanced);
-
-// ---------------------------------------------------------------------------------------
-// Plugin Settings
-// ---------------------------------------------------------------------------------------
-UCLASS(config=Hagoromo)
-class UHagoromoSettings : public UObject
-{
-	GENERATED_BODY()
-
-public:
-	UPROPERTY(EditAnywhere, config, Category = "Hagoromo Plugin Settings")
-	float TargetFrameRate = 60.0f;
-};
 
 
 // ---------------------------------------------------------------------------------------

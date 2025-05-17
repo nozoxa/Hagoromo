@@ -1,6 +1,8 @@
 // Hagoromo : Copyright (c) 2025 nozoxa_0131, MIT License
 
 #include "HagoromoEditorModule.h"
+#include "Developer/Settings/Public/ISettingsModule.h"
+#include "Developer/Settings/Public/ISettingsSection.h"
 
 DEFINE_LOG_CATEGORY(LogHagoromoEditor);
 
@@ -9,13 +11,21 @@ DEFINE_LOG_CATEGORY(LogHagoromoEditor);
 
 void FHagoromoEditorModule::StartupModule()
 {
-	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
+	if (ISettingsModule* SettingsModule { FModuleManager::GetModulePtr<ISettingsModule>("Settings") })
+	{
+		ISettingsSectionPtr SettingsSection { SettingsModule->RegisterSettings("Project", "Plugins", "Hagoromo",
+			LOCTEXT("RuntimeSettingsName", "Hagoromo"),
+			LOCTEXT("RuntimeSettingsDescription", "Configure the Hagoromo plugin"),
+			GetMutableDefault<UHagoromoSettings>()) };
+	}
 }
 
 void FHagoromoEditorModule::ShutdownModule()
 {
-	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
+	if (ISettingsModule* SettingsModule { FModuleManager::GetModulePtr<ISettingsModule>("Settings") })
+	{
+		SettingsModule->UnregisterSettings("Project", "Plugins", "Hagoromo");
+	}
 }
 
 

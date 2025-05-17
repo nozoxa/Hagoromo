@@ -5,19 +5,38 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
+#include "HagoromoEditorModule.generated.h"
+
 DECLARE_LOG_CATEGORY_EXTERN(LogHagoromoEditor, Log, Log);
 
 
 // ---------------------------------------------------------------------------------------
 // Macro
 // ---------------------------------------------------------------------------------------
-#define HGM_LOG(Verbosity, LogChara) \
-UE_LOG(LogHagoromoEditor, Verbosity, TEXT("%s\nSee File: [%s] Line: [%d]\n%s"), ANSI_TO_TCHAR(__FILE__), (__LINE__), LogChara)
+#define HGM_LOG(Verbosity, Format, ...) \
+UE_LOG(LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__))
 
-#define HGM_CLOG(Condition, Verbosity, LogChara) \
-UE_CLOG(Condition, LogHagoromoEditor, Verbosity, TEXT("%s\nSee File: [%s] Line: [%d]\n%s"), ANSI_TO_TCHAR(__FILE__), (__LINE__), LogChara)
+#define HGM_CLOG(Condition, Verbosity, Format, ...) \
+UE_CLOG(Condition, LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__))
 
 
+// ---------------------------------------------------------------------------------------
+// Plugin Settings
+// ---------------------------------------------------------------------------------------
+UCLASS(config=Hagoromo)
+class UHagoromoSettings : public UObject
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, config, Category = "Hagoromo Plugin Settings")
+	float TargetFrameRate = 60.0f;
+};
+
+
+// ---------------------------------------------------------------------------------------
+// Module
+// ---------------------------------------------------------------------------------------
 class FHagoromoEditorModule : public IModuleInterface
 {
 public:

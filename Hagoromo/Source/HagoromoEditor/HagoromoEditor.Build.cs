@@ -8,7 +8,6 @@ public class HagoromoEditor : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
@@ -21,6 +20,7 @@ public class HagoromoEditor : ModuleRules
 			"BlueprintGraph",
 			"UnrealEd",
 			"Persona",
+			"Settings",
 			"Hagoromo",
 		});
 	}

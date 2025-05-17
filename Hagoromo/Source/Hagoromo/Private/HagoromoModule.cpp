@@ -3,8 +3,6 @@
 #include "HagoromoModule.h"
 
 #include "Misc/ConfigContext.h"
-#include "ISettingsModule.h"
-#include "ISettingsSection.h"
 
 DEFINE_LOG_CATEGORY(LogHagoromoRuntime);
 
@@ -16,14 +14,6 @@ FHGMReal HGMGlobal::TargetFrameRate = 60.0;
 #define LOCTEXT_NAMESPACE "FHagoromoModule"
 void FHagoromoModule::StartupModule()
 {
-	if (ISettingsModule* SettingsModule { FModuleManager::GetModulePtr<ISettingsModule>("Settings") })
-	{
-		ISettingsSectionPtr SettingsSection { SettingsModule->RegisterSettings("Project", "Plugins", "Hagoromo",
-			LOCTEXT("RuntimeSettingsName", "Hagoromo"),
-			LOCTEXT("RuntimeSettingsDescription", "Configure the Hagoromo plugin"),
-			GetMutableDefault<UHagoromoSettings>()) };
-	}
-
 	FString HagoromoIni {};
 	if (GConfig)
 	{
@@ -39,10 +29,6 @@ void FHagoromoModule::StartupModule()
 
 void FHagoromoModule::ShutdownModule()
 {
-	if (ISettingsModule* SettingsModule { FModuleManager::GetModulePtr<ISettingsModule>("Settings") })
-	{
-		SettingsModule->UnregisterSettings("Project", "Plugins", "Hagoromo");
-	}
 }
 #undef LOCTEXT_NAMESPACE
 

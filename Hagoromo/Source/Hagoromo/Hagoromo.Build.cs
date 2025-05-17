@@ -28,7 +28,6 @@ public class Hagoromo : ModuleRules
 			"AnimGraphRuntime",
 			"Slate",
 			"SlateCore",
-			"Settings"
 		});
 	}
 }
