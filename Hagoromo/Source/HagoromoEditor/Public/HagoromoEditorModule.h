@@ -14,10 +14,10 @@ DECLARE_LOG_CATEGORY_EXTERN(LogHagoromoEditor, Log, Log);
 // Macro
 // ---------------------------------------------------------------------------------------
 #define HGM_LOG(Verbosity, Format, ...) \
-UE_LOG(LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__))
+UE_LOG(LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__)); \
 
 #define HGM_CLOG(Condition, Verbosity, Format, ...) \
-UE_CLOG(Condition, LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__))
+UE_CLOG(Condition, LogHagoromoEditor, Verbosity, TEXT("[%hs L%d] %s"), (__FUNCTION__), (__LINE__), *FString::Printf(Format, ##__VA_ARGS__)); \
 
 
 // ---------------------------------------------------------------------------------------

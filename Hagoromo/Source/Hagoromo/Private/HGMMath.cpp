@@ -573,6 +573,24 @@ FHGMSIMDVector3 FHGMMathLibrary::RotateAngleAxisRad(const FHGMSIMDVector3& sVect
 }
 
 
+FHGMSIMDVector3 FHGMMathLibrary::GetAxisX(const FHGMSIMDQuaternion& sQ)
+{
+	return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::ForwardVector);
+}
+
+
+FHGMSIMDVector3 FHGMMathLibrary::GetAxisY(const FHGMSIMDQuaternion& sQ)
+{
+	return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::RightVector);
+}
+
+
+FHGMSIMDVector3 FHGMMathLibrary::GetAxisZ(const FHGMSIMDQuaternion& sQ)
+{
+	return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::UpVector);
+}
+
+
 FHGMSIMDVector3 FHGMMathLibrary::GetUnitAxis(const FHGMSIMDQuaternion& sQ, const FHGMSIMDInt& sAxisIndex)
 {
 	TStaticArray<FHGMQuaternion, 4> UnpackedQuaternions {};

@@ -10,15 +10,6 @@
 
 #include "Animation/AnimNodeBase.h"
 
-DECLARE_CYCLE_STAT(TEXT("Constraint VerticalStructuralConstraint"), STAT_ConstraintVerticalStructuralConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint HorizontalStructuralConstraint"), STAT_ConstraintHorizontalStructuralConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint ShearConstraint"), STAT_ConstraintShearConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint VerticalBendConstraint"), STAT_ConstraintVerticalBendConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint HorizontalBendConstraint"), STAT_ConstraintHorizontalBendConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint RelativeLimitAngleConstraint"), STAT_ConstraintRelativeLimitAngleConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint AnimPoseMovableRadiusConstraint"), STAT_ConstraintAnimPoseMovableRadiusConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint AnimPoseLimitAngleConstraint"), STAT_ConstraintAnimPoseLimitAngleConstraint, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Constraint AnimPosePlanarConstraint"), STAT_ConstraintAnimPosePlanarConstraint, STATGROUP_Hagoromo);
 
 namespace
 {

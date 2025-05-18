@@ -1128,20 +1128,11 @@ struct HAGOROMO_API FHGMMathLibrary
 		return FHGMMathLibrary::RotateAngleAxisRad(sVector, sAngleDeg * HGMSIMDConstants::DegreesToRadians, sAxis);
 	}
 
-	FORCEINLINE static FHGMSIMDVector3 GetAxisX(const FHGMSIMDQuaternion& sQ)
-	{
-		return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::ForwardVector);
-	}
+	static FHGMSIMDVector3 GetAxisX(const FHGMSIMDQuaternion& sQ);
 
-	FORCEINLINE static FHGMSIMDVector3 GetAxisY(const FHGMSIMDQuaternion& sQ)
-	{
-		return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::RightVector);
-	}
+	static FHGMSIMDVector3 GetAxisY(const FHGMSIMDQuaternion& sQ);
 
-	FORCEINLINE static FHGMSIMDVector3 GetAxisZ(const FHGMSIMDQuaternion& sQ)
-	{
-		return FHGMMathLibrary::RotateVector(sQ, FHGMSIMDVector3::UpVector);
-	}
+	static FHGMSIMDVector3 GetAxisZ(const FHGMSIMDQuaternion& sQ);
 
 	FORCEINLINE static FHGMSIMDVector3 GetForwardVector(const FHGMSIMDQuaternion& sQ)
 	{

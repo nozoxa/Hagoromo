@@ -6,9 +6,6 @@
 
 #include "Math/Axis.h"
 
-DECLARE_CYCLE_STAT(TEXT("Physics ApplyForces"), STAT_PhysicsApplyForces, STATGROUP_Hagoromo);
-DECLARE_CYCLE_STAT(TEXT("Physics VerletIntegrate"), STAT_PhysicsVerletIntegrate, STATGROUP_Hagoromo);
-
 
 void FHGMPhysicsLibrary::ApplyForces(FComponentSpacePoseContext& Output, const FHGMPhysicsContext& PhysicsContext, TArrayView<FHGMSIMDVector3> Positions, TArrayView<FHGMSIMDVector3> PrevPositions,
 								TConstArrayView<FHGMSIMDReal> WorldVelocityDampings, TConstArrayView<FHGMSIMDReal> WorldAngularVelocityDampings, TConstArrayView<FHGMSIMDReal> SimulationVelocityDampings, TConstArrayView<FHGMSIMDReal> SimulationAngularVelocityDampings, TConstArrayView<FHGMSIMDReal> MasterDampings,
