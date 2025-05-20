@@ -330,12 +330,20 @@ void FHGMDebugLibrary::DrawShear(FComponentSpacePoseContext& PoseContext, FHGMDy
 	for (int32 ShearIndexBase = 0; ShearIndexBase < Solver->ShearStructures.Num(); ShearIndexBase += 2)
 	{
 		const int32 HorizontalChainIndex = ShearIndexBase / 2;
-		bool bIsEndHorizontalBone = (HorizontalChainIndex % Solver->SimulationPlane.ActualPackedHorizontalBoneNum) + 1 == Solver->SimulationPlane.ActualPackedHorizontalBoneNum;
+		bool bIsEndHorizontalBone = (HorizontalChainIndex % Solver->SimulationPlane.PackedHorizontalBoneNum) + 1 == Solver->SimulationPlane.PackedHorizontalBoneNum;
 
 		int32 EndComponentIndex = 3;
 		if (bIsEndHorizontalBone)
 		{
 			EndComponentIndex = (Solver->SimulationPlane.ActualUnpackedHorizontalBoneNum - 1) % 4;
+			if (!bLoopHorizontalStructure)
+			{
+				--EndComponentIndex;
+				if (EndComponentIndex < 0)
+				{
+					continue;
+				}
+			}
 		}
 
 		for (int32 Offset = 0; Offset < 2; ++Offset)

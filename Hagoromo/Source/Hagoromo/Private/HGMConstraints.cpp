@@ -166,14 +166,14 @@ void FHGMConstraintLibrary::MakeHorizontalStructure(FHGMSimulationPlane& Simulat
 	if (bLoopHorizontalStructure)
 	{
 		const int32 LastVerticalChainPackedIndex = (SimulationPlane.ActualUnpackedHorizontalBoneNum - 1) * SimulationPlane.PackedHorizontalBoneNum;
-		for (int32 PackedVerticalBoneOffset = 0; PackedVerticalBoneOffset < SimulationPlane.PackedVerticalBoneNum; ++PackedVerticalBoneOffset)
+		for (int32 PackedHorizontalBoneOffset = 0; PackedHorizontalBoneOffset < SimulationPlane.PackedHorizontalBoneNum; ++PackedHorizontalBoneOffset)
 		{
-			const int32 PackedLinkFirstBoneIndex = LastVerticalChainPackedIndex + PackedVerticalBoneOffset;
+			const int32 PackedLinkFirstBoneIndex = LastVerticalChainPackedIndex + PackedHorizontalBoneOffset;
 			FHGMSIMDInt sUnpackedLinkFirstBoneIndex {};
 			const int32 UnpackedLinkFirstIndex = PackedLinkFirstBoneIndex * 4;
 			FHGMSIMDLibrary::Load(sUnpackedLinkFirstBoneIndex, UnpackedLinkFirstIndex + 0, UnpackedLinkFirstIndex + 1, UnpackedLinkFirstIndex + 2, UnpackedLinkFirstIndex + 3);
 
-			const int32 PackedLinkSecondBoneIndex = PackedVerticalBoneOffset;
+			const int32 PackedLinkSecondBoneIndex = PackedHorizontalBoneOffset;
 			FHGMSIMDInt sUnpackedLinkSecondBoneIndex {};
 			const int32 UnpackedLinkSecondIndex = PackedLinkSecondBoneIndex * 4;
 			FHGMSIMDLibrary::Load(sUnpackedLinkSecondBoneIndex, UnpackedLinkSecondIndex + 0, UnpackedLinkSecondIndex + 1, UnpackedLinkSecondIndex + 2, UnpackedLinkSecondIndex + 3);
@@ -209,7 +209,7 @@ void FHGMConstraintLibrary::HorizontalStructuralConstraint(TArrayView<FHGMSIMDSt
 
 void FHGMConstraintLibrary::MakeShearStructure(const FHGMSimulationPlane& SimulationPlane, TConstArrayView<FHGMSIMDVector3> Positions, bool bLoopHorizontalStructure, TArray<FHGMSIMDShearStructure>& OutShearStructures)
 {
-	OutShearStructures.Reset((SimulationPlane.PackedVerticalBoneNum - 1) * SimulationPlane.ActualPackedHorizontalBoneNum * 2);
+	OutShearStructures.Reset((SimulationPlane.PackedVerticalBoneNum - 1) * (SimulationPlane.ActualUnpackedHorizontalBoneNum / 4 )* 2);
 
 	int32 PackedIndex = 0;
 	while(PackedIndex < Positions.Num())
@@ -227,10 +227,9 @@ void FHGMConstraintLibrary::MakeShearStructure(const FHGMSimulationPlane& Simula
 		int32 LowerRightUnpackedEndIndex = 0;
 		int32 EndComponentIndex = 3;
 
-		bool bIsEndHorizontalBone = (PackedIndex % SimulationPlane.PackedHorizontalBoneNum) + 1 == SimulationPlane.ActualPackedHorizontalBoneNum;
+		bool bIsEndHorizontalBone = ((PackedIndex % SimulationPlane.PackedHorizontalBoneNum)) + 1 == SimulationPlane.PackedHorizontalBoneNum;
 		if (bIsEndHorizontalBone)
 		{
-			LoopIncreaseValue = (SimulationPlane.PackedHorizontalBoneNum - SimulationPlane.ActualPackedHorizontalBoneNum) + 1;
 			EndComponentIndex = (SimulationPlane.ActualUnpackedHorizontalBoneNum - 1) % 4;
 
 			if (bLoopHorizontalStructure)
@@ -304,12 +303,20 @@ void FHGMConstraintLibrary::ShearConstraint(TArrayView<FHGMSIMDShearStructure> S
 	for (int32 ShearIndexBase = 0; ShearIndexBase < Shears.Num(); ShearIndexBase += 2)
 	{
 		const int32 HorizontalChainIndex = ShearIndexBase / 2;
-		bool bIsEndHorizontalBone = (HorizontalChainIndex % SimulationPlane.ActualPackedHorizontalBoneNum) + 1 == SimulationPlane.ActualPackedHorizontalBoneNum;
+		bool bIsEndHorizontalBone = (HorizontalChainIndex % SimulationPlane.PackedHorizontalBoneNum) + 1 == SimulationPlane.PackedHorizontalBoneNum;
 
 		int32 EndComponentIndex = 3;
 		if (bIsEndHorizontalBone)
 		{
 			EndComponentIndex = (SimulationPlane.ActualUnpackedHorizontalBoneNum - 1) % 4;
+			if (!PhysicsContext.PhysicsSettings.bLoopHorizontalStructure)
+			{
+				--EndComponentIndex;
+				if (EndComponentIndex < 0)
+				{
+					continue;
+				}
+			}
 		}
 
 		for (int32 Offset = 0; Offset < 2; ++Offset)

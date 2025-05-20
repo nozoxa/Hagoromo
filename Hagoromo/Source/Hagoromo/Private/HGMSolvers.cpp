@@ -694,7 +694,6 @@ bool FHGMDynamicBoneSolver::Initialize(const FBoneContainer& RequiredBones, cons
 	SimulationPlane.PackedHorizontalBoneNum = SimulationPlane.UnpackedHorizontalBoneNum / 4;
 	SimulationPlane.PackedVerticalBoneNum = SimulationPlane.UnpackedVerticalBoneNum / 4;
 	SimulationPlane.ActualUnpackedHorizontalBoneNum = ChainSettings.Num();
-	SimulationPlane.ActualPackedHorizontalBoneNum = (ChainSettings.Num() / 4) + 1;
 
 	Bones.Reset(UnpackedPositionNum);
 	Positions.Reset(PackedPositionNum);

@@ -35,7 +35,6 @@ struct FHGMSimulationPlane
 	// FAnimNode_Hagoromo::ChainSettings.Num().
 	// Note: Dummy bones are not included.
 	int32 ActualUnpackedHorizontalBoneNum = 0;
-	int32 ActualPackedHorizontalBoneNum = 0;
 };
 
 
